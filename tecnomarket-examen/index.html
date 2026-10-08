@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TecnoMarket</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>TecnoMarket</h1>
+    <p>Catálogo de equipos y accesorios tecnológicos para el área comercial.</p>
+  </div>
+  <button id="btnReload" class="btn ghost" type="button">Recargar catálogo</button>
+</header>
+
+<main class="layout">
+  <section class="kpis" aria-label="Indicadores">
+    <div class="kpi"><span>Total en catálogo</span><strong id="kpiTotal">0</strong></div>
+    <div class="kpi"><span>Mostrando</span><strong id="kpiShown">0</strong></div>
+    <div class="kpi"><span>Precio promedio</span><strong id="kpiAvg">$0</strong></div>
+    <div class="kpi"><span>Stock bajo (&lt; 10)</span><strong id="kpiLow">0</strong></div>
+  </section>
+
+  <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+  <div class="cols">
+    <section class="catalog">
+      <form class="filters" id="filters" onsubmit="return false">
+        <label>Buscar por nombre
+          <input type="search" id="search" placeholder="Ej: phone">
+        </label>
+        <label>Categoría
+          <select id="category"><option value="">Todas</option></select>
+        </label>
+        <label>Rango de precio
+          <select id="price">
+            <option value="all">Todos</option>
+            <option value="low">Menor o igual a 500</option>
+            <option value="mid">Entre 501 y 1500</option>
+            <option value="high">Mayor a 1500</option>
+          </select>
+        </label>
+      </form>
+      <p id="counter" class="counter">Mostrando 0 productos</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Producto</th><th>Categoría</th><th>Marca</th><th class="num">Precio</th><th class="num">Stock</th><th></th></tr></thead>
+          <tbody id="productBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <h2>Registrar producto</h2>
+      <form id="productForm" novalidate>
+        <label>Título <input id="fTitle" required></label>
+        <label>Precio (USD) <input id="fPrice" type="number" min="0" step="0.01" required></label>
+        <label>Categoría <input id="fCategory" list="catList" required></label>
+        <datalist id="catList"></datalist>
+        <label>Stock <input id="fStock" type="number" min="0" step="1" required></label>
+        <label>Marca (opcional) <input id="fBrand"></label>
+        <button class="btn" type="submit">Guardar producto</button>
+      </form>
+      <p class="note">DummyJSON simula POST y DELETE: los cambios no se guardan en un servidor y se pierden al recargar.</p>
+    </aside>
+  </div>
+</main>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
